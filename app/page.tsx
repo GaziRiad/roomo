@@ -1,4 +1,5 @@
 import SignoutForm from "@/components/SignoutForm";
+import WidgetDropDown from "@/components/WidgetDropDown";
 import { auth } from "@/lib/auth";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -11,20 +12,18 @@ export default async function page() {
   if (!session?.user) return redirect("/login");
 
   return (
-    <div className="max-w-6xl mx-auto py-20">
-      <h1 className="mb-12 text-2xl">Hello, world</h1>
+    <div className="h-screen w-full bg-slate-900 p-8 text-white">
+      <p className="text-xl text-white/80">
+        {session?.user?.name?.split(" ")[0] ?? "Guest"}&apos;S ROOM
+      </p>
 
-      <div className="flex mb-6 items-center gap-6">
-        <Image
-          src={session.user.image ?? "/default-image.png"}
-          alt={`Image of ${session.user.name}`}
-          width={40}
-          height={40}
-          className="size-10 rounded-full"
-        />
-        <p>{session.user.name}</p>
+      <div className="flex items-center">
+        <p className="pb-2 text-3xl">
+          Nature<span className="text-5xl">🌲</span>
+        </p>
+
+        <WidgetDropDown />
       </div>
-      <SignoutForm />
     </div>
   );
 }
