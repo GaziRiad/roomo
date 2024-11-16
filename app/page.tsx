@@ -1,3 +1,4 @@
+import DraggableContainer from "@/components/DraggableContainer";
 import SpaceDropDown from "@/components/SpaceDropDown";
 import WidgetDropDown from "@/components/WidgetDropDown";
 import { auth } from "@/lib/auth";
@@ -11,19 +12,15 @@ export default async function page() {
   if (!session?.user) return redirect("/login");
 
   return (
-    <div className="h-screen w-full bg-slate-900 p-8 text-white">
+    <div className="flex h-screen w-full flex-col bg-slate-900 p-8 text-white">
       <p className="text-xl text-white/80">
         {session?.user?.name?.split(" ")[0] ?? "Guest"}&apos;S ROOM
       </p>
-
-      <div className="flex items-center">
-        {/* <p className="pb-2 text-3xl">
-          Nature<span className="text-5xl">🌲</span>
-        </p> */}
-
+      <div className="mb-4 flex items-center">
         <SpaceDropDown />
         <WidgetDropDown />
       </div>
+      <DraggableContainer />
     </div>
   );
 }
