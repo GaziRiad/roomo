@@ -1,4 +1,5 @@
 import DraggableContainer from "@/components/DraggableContainer";
+import LogoutButton from "@/components/LogoutButton";
 import SpaceDropDown from "@/components/SpaceDropDown";
 import WidgetDropDown from "@/components/WidgetDropDown";
 import { auth } from "@/lib/auth";
@@ -19,6 +20,8 @@ export default async function page() {
       <div className="mb-4 flex items-center">
         <SpaceDropDown />
         <WidgetDropDown />
+
+        <LogoutButton />
       </div>
       <DraggableContainer />
     </div>
