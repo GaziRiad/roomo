@@ -27,6 +27,9 @@ export default async function page() {
         <LogoutButton />
       </div>
       <DraggableContainer />
+      {/*  */}
+      {/*  */}
+      {/* Remplate your code */}
       <div className="mx-auto flex h-16 items-center justify-center gap-10 rounded-full bg-slate-500/60 px-12">
         <div className="flex items-center gap-3">
           <IoVolumeHighOutline size={30} className="cursor-pointer" />

@@ -18,6 +18,7 @@ export default function DraggableContainer() {
     >
       {timer && <DraggableTimer containerRef={containerRef} />}
       {todoList && <DraggableTodoList containerRef={containerRef} />}
+      {todoList && <DraggableTodoList containerRef={containerRef} />}
     </div>
   );
 }
