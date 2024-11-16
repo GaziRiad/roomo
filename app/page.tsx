@@ -13,7 +13,7 @@ export default async function page() {
   if (!session?.user) return redirect("/login");
 
   return (
-    <div className="flex h-screen w-full flex-col bg-slate-900 p-8 text-white">
+    <div className="flex h-screen w-full flex-col bg-[url('/nature1.jpg')] bg-cover bg-center p-8 text-white">
       <p className="text-xl text-white/80">
         {session?.user?.name?.split(" ")[0] ?? "Guest"}&apos;S ROOM
       </p>
