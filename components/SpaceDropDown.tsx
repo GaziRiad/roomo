@@ -91,8 +91,8 @@ export default function SpaceDropDown() {
       <DropdownMenuTrigger className="cursor-pointer text-3xl outline-none">
         Nature<span className="text-5xl">🌲</span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="ml-4 mt-2 min-w-64 border-slate-950 bg-slate-950/95 text-white">
-        <DropdownMenuLabel className="flex items-center gap-5 py-5">
+      <DropdownMenuContent className="ml-4 grid grid-cols-2 gap-4 border-slate-950 bg-slate-950/95 px-4 pb-4 pt-2 text-white">
+        <DropdownMenuLabel className="col-span-2 flex items-center gap-5 py-5">
           {data.map((item) => (
             <div key={item.catrgory} className="flex items-center">
               <span>{item.catrgory}</span>
@@ -100,13 +100,32 @@ export default function SpaceDropDown() {
             </div>
           ))}
         </DropdownMenuLabel>
-        <DropdownMenuSeparator className="mx-auto bg-white/40" />
 
         {/*  */}
-        <DropdownMenuItem className="py-5" onClick={() => console.log("OPEN")}>
-          <FaRegStickyNote />
-          <span>Sticky Notes</span>
-        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="h-40 w-80 rounded-md bg-white py-5"
+          onClick={() => console.log("OPEN")}
+        ></DropdownMenuItem>
+        <DropdownMenuItem
+          className="h-40 w-80 rounded-md bg-white py-5"
+          onClick={() => console.log("OPEN")}
+        ></DropdownMenuItem>
+        <DropdownMenuItem
+          className="h-40 w-80 rounded-md bg-white py-5"
+          onClick={() => console.log("OPEN")}
+        ></DropdownMenuItem>
+        <DropdownMenuItem
+          className="h-40 w-80 rounded-md bg-white py-5"
+          onClick={() => console.log("OPEN")}
+        ></DropdownMenuItem>
+        <DropdownMenuItem
+          className="h-40 w-80 rounded-md bg-white py-5"
+          onClick={() => console.log("OPEN")}
+        ></DropdownMenuItem>
+        <DropdownMenuItem
+          className="h-40 w-80 rounded-md bg-white py-5"
+          onClick={() => console.log("OPEN")}
+        ></DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
