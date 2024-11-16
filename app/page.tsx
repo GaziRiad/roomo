@@ -1,7 +1,6 @@
-import SignoutForm from "@/components/SignoutForm";
+import SpaceDropDown from "@/components/SpaceDropDown";
 import WidgetDropDown from "@/components/WidgetDropDown";
 import { auth } from "@/lib/auth";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -18,10 +17,11 @@ export default async function page() {
       </p>
 
       <div className="flex items-center">
-        <p className="pb-2 text-3xl">
+        {/* <p className="pb-2 text-3xl">
           Nature<span className="text-5xl">🌲</span>
-        </p>
+        </p> */}
 
+        <SpaceDropDown />
         <WidgetDropDown />
       </div>
     </div>

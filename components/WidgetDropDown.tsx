@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,15 +20,18 @@ export default function WidgetDropDown() {
       <DropdownMenuContent className="mt-2 min-w-64 border-slate-950 bg-slate-950/95 text-white">
         <DropdownMenuLabel className="py-5">ADD WIDGETS</DropdownMenuLabel>
         <DropdownMenuSeparator className="mx-auto bg-white/40" />
-        <DropdownMenuItem className="py-5">
+        <DropdownMenuItem
+          className="py-5"
+          onClick={() => console.log("OPEN timer")}
+        >
           <PiTimerBold />
           <span>Timer</span>
         </DropdownMenuItem>
-        <DropdownMenuItem className="py-5">
+        <DropdownMenuItem className="py-5" onClick={() => console.log("OPEN")}>
           <PiNotePencilBold />
           <span>Todo List</span>
         </DropdownMenuItem>
-        <DropdownMenuItem className="py-5">
+        <DropdownMenuItem className="py-5" onClick={() => console.log("OPEN")}>
           <FaRegStickyNote />
           <span>Sticky Notes</span>
         </DropdownMenuItem>
