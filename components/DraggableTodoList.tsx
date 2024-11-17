@@ -99,7 +99,9 @@ export default function DraggableTodoList({
       aria-label="Draggable Todo List"
     >
       <div
-        className="flex cursor-grab items-center justify-between px-2 pb-2"
+        className={`flex items-center justify-between px-2 pb-2 ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        }`}
         data-draggable
       >
         <h2 className="text-xl">Tasks</h2>

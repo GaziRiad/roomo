@@ -8,13 +8,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTimer, useTodoList } from "@/store";
+import { useStickyNotes, useTimer, useTodoList } from "@/store";
 import { FaRegStickyNote } from "react-icons/fa";
 import { PiNotePencilBold, PiTimerBold } from "react-icons/pi";
 
 export default function WidgetDropDown() {
   const timer = useTimer();
   const todoList = useTodoList();
+  const note = useStickyNotes();
 
   return (
     <DropdownMenu>
@@ -35,7 +36,7 @@ export default function WidgetDropDown() {
           <PiNotePencilBold />
           <span>Todo List</span>
         </DropdownMenuItem>
-        <DropdownMenuItem className="py-5" onClick={() => console.log("OPEN")}>
+        <DropdownMenuItem className="py-5" onClick={() => note.addNote("")}>
           <FaRegStickyNote />
           <span>Sticky Notes</span>
         </DropdownMenuItem>

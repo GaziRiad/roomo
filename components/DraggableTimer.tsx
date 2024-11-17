@@ -97,7 +97,9 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
       aria-label="Draggable Timer"
     >
       <div
-        className="flex cursor-grab items-center justify-between border-b-2 border-b-gray-400 px-2 pb-2"
+        className={`flex items-center justify-between border-b-2 border-b-gray-400 px-2 pb-2 ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        }`}
         data-draggable
       >
         <h2 className="text-xl">Timer</h2>
