@@ -2,35 +2,51 @@
 
 import React, { useState, useRef } from "react";
 import { Card } from "@/components/ui/card";
+import { IoRemove } from "react-icons/io5";
+import { CheckCircle, CircleIcon, CircleX } from "lucide-react";
+import { useTodoList } from "@/store";
 
-interface DraggableTimerProps {
+interface DraggableTodoListProps {
   containerRef: React.RefObject<HTMLDivElement>;
+}
+
+interface Task {
+  id: number;
+  text: string;
+  completed: boolean;
 }
 
 export default function DraggableTodoList({
   containerRef,
-}: DraggableTimerProps) {
+}: DraggableTodoListProps) {
+  const todoList = useTodoList();
   const [position, setPosition] = useState({ x: 680, y: 120 });
   const [isDragging, setIsDragging] = useState(false);
-  const timerRef = useRef<HTMLDivElement>(null);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [taskText, setTaskText] = useState("");
+  const todoRef = useRef<HTMLDivElement>(null);
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    if (!target.closest("[data-draggable]")) return;
+
     setIsDragging(true);
     const startX = e.clientX - position.x;
     const startY = e.clientY - position.y;
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current && timerRef.current) {
+      if (containerRef.current && todoRef.current) {
         const containerRect = containerRef.current.getBoundingClientRect();
-        const timerRect = timerRef.current.getBoundingClientRect();
+        const todoRect = todoRef.current.getBoundingClientRect();
 
         const newX = Math.max(
           0,
-          Math.min(e.clientX - startX, containerRect.width - timerRect.width),
+          Math.min(e.clientX - startX, containerRect.width - todoRect.width),
         );
         const newY = Math.max(
           0,
-          Math.min(e.clientY - startY, containerRect.height - timerRect.height),
+          Math.min(e.clientY - startY, containerRect.height - todoRect.height),
         );
 
         setPosition({ x: newX, y: newY });
@@ -47,19 +63,106 @@ export default function DraggableTodoList({
     document.addEventListener("mouseup", handleMouseUp);
   };
 
+  const handleAddTask = () => {
+    if (taskText.trim() === "") return;
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      { id: Date.now(), text: taskText, completed: false },
+    ]);
+    setTaskText("");
+  };
+
+  const handleRemoveTask = (id: number) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  };
+
+  const handleToggleTask = (id: number) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task,
+      ),
+    );
+  };
+
   return (
     <Card
-      ref={timerRef}
-      className={`absolute h-40 w-64 cursor-move select-none p-2 text-center ${isDragging ? "opacity-75" : ""}`}
+      ref={todoRef}
+      className={`w-100 absolute flex min-h-44 select-none flex-col justify-between border-none bg-slate-950/95 p-2 text-center text-white ${
+        isDragging ? "opacity-75" : ""
+      }`}
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
       }}
       onMouseDown={handleMouseDown}
-      role="timer"
+      role="TodoList"
       aria-label="Draggable Todo List"
     >
-      <div className="text-lg font-bold">Im a movable todo list</div>
+      <div
+        className="flex cursor-grab items-center justify-between px-2 pb-2"
+        data-draggable
+      >
+        <h2 className="text-xl">Tasks</h2>
+        <span
+          className="h-full cursor-pointer"
+          onClick={() => todoList.hideTodoList()}
+        >
+          <IoRemove size={24} />
+        </span>
+      </div>
+
+      <div className="flex items-center gap-2 px-2 py-2">
+        <input
+          type="text"
+          value={taskText}
+          onChange={(e) => setTaskText(e.target.value)}
+          placeholder="Add a task..."
+          className="flex-1 rounded-md border-none px-2 py-1 text-black outline-none"
+        />
+        <button
+          onClick={handleAddTask}
+          className="rounded-md bg-blue-500 px-4 py-1 text-white hover:bg-blue-600"
+        >
+          Add
+        </button>
+      </div>
+
+      <ul className="min-h-40 px-2 py-1">
+        {tasks.map((task) => (
+          <li
+            key={task.id}
+            className="mb-2 flex items-center justify-between gap-2 py-1.5"
+          >
+            <div className="flex items-center gap-2">
+              {task.completed ? (
+                <CheckCircle
+                  className="cursor-pointer rounded-full bg-blue-600"
+                  onClick={() => handleToggleTask(task.id)}
+                />
+              ) : (
+                <CircleIcon
+                  className="cursor-pointer"
+                  onClick={() => handleToggleTask(task.id)}
+                />
+              )}
+              <span
+                className={`cursor-pointer text-lg ${
+                  task.completed ? "text-gray-500 line-through" : ""
+                }`}
+                onClick={() => handleToggleTask(task.id)}
+              >
+                {task.text}
+              </span>
+            </div>
+            <span
+              onClick={() => handleRemoveTask(task.id)}
+              className="cursor-pointer text-red-500 hover:text-red-700"
+            >
+              <CircleX />
+            </span>
+          </li>
+        ))}
+      </ul>
     </Card>
   );
 }

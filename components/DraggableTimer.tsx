@@ -97,11 +97,14 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
       aria-label="Draggable Timer"
     >
       <div
-        className="flex cursor-move items-center justify-between border-b-2 border-b-gray-400 px-2 pb-2"
+        className="flex cursor-grab items-center justify-between border-b-2 border-b-gray-400 px-2 pb-2"
         data-draggable
       >
         <h2 className="text-xl">Timer</h2>
-        <span onClick={() => timer.hideTimer()} className="cursor-pointer">
+        <span
+          onClick={() => timer.hideTimer()}
+          className="h-full cursor-pointer"
+        >
           <IoRemove size={32} />
         </span>
       </div>
