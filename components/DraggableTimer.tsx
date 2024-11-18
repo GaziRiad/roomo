@@ -97,9 +97,11 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
     setter: React.Dispatch<React.SetStateAction<number>>,
   ) => {
     const num = parseInt(value, 10);
-    if (num >= 0 || value === "") {
-      setter(num || 0);
+    setter(num || 0);
+    if (num > 0 || value === "") {
       setIsModified(true);
+    } else {
+      setIsModified(false);
     }
   };
 
@@ -128,7 +130,7 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
       aria-label="Draggable Timer"
     >
       <div
-        className={`flex items-center justify-between border-b-2 border-b-gray-400 px-2 pb-4 ${
+        className={`flex items-center justify-between border-b-2 border-b-gray-400 px-2 pb-5 ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
         data-draggable
@@ -142,7 +144,7 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
         </span>
       </div>
 
-      <div className="flex cursor-default items-center justify-between gap-2 p-4">
+      <div className="flex cursor-default items-center justify-between gap-2 p-4 pb-5">
         <h3 className="w-24 text-start text-4xl font-bold">
           {formatTime(time)}
         </h3>
@@ -157,7 +159,7 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
             if (checked === 0) setTime(pomodoro * 60);
             if (checked === 1) setTime(shortBreak * 60);
             if (checked === 2) setTime(longBreak * 60);
-            setIsRunning(!isRunning);
+            setIsRunning(false);
           }}
           className="flex cursor-pointer justify-center"
           title="Refresh"
@@ -166,7 +168,7 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
         </span>
       </div>
 
-      <ul className="flex cursor-default justify-between px-2 pb-4">
+      <ul className="flex cursor-default justify-between px-2 pb-5">
         <li>
           <p
             className={`cursor-pointer pb-1 hover:opacity-80 ${
