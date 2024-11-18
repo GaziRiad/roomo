@@ -25,7 +25,7 @@ export default function Background({
       player.mute();
     } else {
       player.unMute();
-      player.setVolume(volume * 100);
+      player.setVolume(volume);
     }
   };
 
@@ -69,6 +69,7 @@ export default function Background({
       rel: 0,
       // Hide video info
       showinfo: 0,
+      cc_load_policy: 3, // This disables captions
     },
   };
 

@@ -18,7 +18,7 @@ export default async function page() {
   if (!session?.user) return redirect("/login");
 
   return (
-    <div className="flex h-screen w-full flex-col overflow-hidden bg-[url('/nature1.jpg')] bg-cover bg-center p-8 text-white">
+    <div className="flex h-screen w-full flex-col overflow-hidden bg-black p-8 text-white">
       <Background />
 
       <p className="relative text-xl text-white/80">
