@@ -5,7 +5,7 @@ import YouTube from "react-youtube";
 import { useAudio } from "../store";
 
 export default function Background({
-  videoId = "j28oQ3zsGGI",
+  videoId = "5wXhtzqrmW0",
 }: {
   videoId?: string;
 }) {
