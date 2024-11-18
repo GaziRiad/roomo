@@ -45,42 +45,36 @@ export default function Background({
   const opts = {
     height: "100%",
     width: "100%",
+    host: "https://www.youtube-nocookie.com",
     playerVars: {
-      // Force autoplay
       autoplay: 1,
-      // Enable JS API
       enablejsapi: 1,
-      // Hide controls
       controls: 0,
-      // Disable keyboard
       disablekb: 1,
-      // Disable fullscreen
       fs: 0,
-      // Hide video annotations
       iv_load_policy: 3,
-      // Enable looping
       playlist: videoId,
       loop: 1,
-      // Hide YouTube branding
       modestbranding: 1,
-      // Enable inline playback
       playsinline: 1,
-      // Hide related videos
       rel: 0,
-      // Hide video info
       showinfo: 0,
-      cc_load_policy: 3, // This disables captions
+      cc_load_policy: 3, // Disables captions
+      origin: window.location.origin, // Specifies the origin for improved security
+      widget_referrer: window.location.href, // Specifies the referrer
+      color: "white", // Use a white progress bar (less conspicuous)
+      hl: "en", // Set the player language to English
     },
   };
 
   return (
-    <div className="absolute left-0 top-0 h-full w-full overflow-hidden">
+    <div className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-hidden">
       <YouTube
         videoId={videoId}
         opts={opts}
         onReady={onReady}
         ref={playerRef}
-        className="absolute left-1/2 top-1/2 h-[56.25vw] min-h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2"
+        className="absolute left-1/2 top-1/2 h-[56.25vw] min-h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2 object-cover"
         onPlay={() => {
           console.log("Video started playing");
         }}
