@@ -34,7 +34,7 @@ interface AudioState {
 
 export const useAudio = create<AudioState>((set) => ({
   isMute: true,
-  volume: 0,
+  volume: 20,
   toggleMute: () =>
     set((state) => ({
       isMute: !state.isMute,
