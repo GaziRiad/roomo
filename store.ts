@@ -25,6 +25,26 @@ interface StickyNotesState {
   editeNote: (id: number, content: string) => void;
 }
 
+interface AudioState {
+  isMute: boolean;
+  volume: number;
+  toggleMute: () => void;
+  setVolume: (volume: number) => void;
+}
+
+export const useAudio = create<AudioState>((set) => ({
+  isMute: false,
+  volume: 50,
+  toggleMute: () =>
+    set((state) => ({
+      isMute: !state.isMute,
+    })),
+  setVolume: (volume) =>
+    set(() => ({
+      volume: Math.max(0, Math.min(100, volume)),
+    })),
+}));
+
 export const useTimer = create<TimerState>((set) => ({
   timer: false,
   showTimer: () => set(() => ({ timer: true })),

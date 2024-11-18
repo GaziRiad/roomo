@@ -2,19 +2,11 @@
 
 import * as React from "react";
 import { useRef } from "react";
+import { useAudio } from "../store";
 
-export function ProgressSound({
-  isMute,
-  volume,
-  onVolumeChange,
-  className,
-}: {
-  isMute: boolean;
-  volume: number;
-  onVolumeChange: (newVolume: number) => void;
-  className: string;
-}) {
+export function ProgressSound({ className }: { className: string }) {
   const progressRef = useRef<HTMLDivElement | null>(null);
+  const { isMute, volume, setVolume } = useAudio();
 
   const handleMouseMove = (event: MouseEvent | TouchEvent) => {
     if (!progressRef.current) return;
@@ -28,7 +20,7 @@ export function ProgressSound({
 
     percentage = Math.max(0, Math.min(100, percentage)); // Clamp between 0 and 100
 
-    onVolumeChange(isMute ? 0 : percentage);
+    setVolume(isMute ? 0 : percentage);
   };
 
   const handleMouseDown = (event: React.MouseEvent | React.TouchEvent) => {
@@ -50,12 +42,12 @@ export function ProgressSound({
   return (
     <div
       ref={progressRef}
-      className={`relative w-40 h-4 bg-gray-200 rounded-md ${className}`}
+      className={`relative h-4 w-40 rounded-md bg-gray-200 ${className}`}
       onMouseDown={handleMouseDown}
       onTouchStart={handleMouseDown}
     >
       <div
-        className="absolute top-0 left-0 h-full bg-blue-500 rounded-md"
+        className="absolute left-0 top-0 h-full rounded-md bg-blue-500"
         style={{ width: `${volume}%` }}
       ></div>
     </div>

@@ -1,5 +1,8 @@
+import Background from "@/components/Background";
 import DraggableContainer from "@/components/DraggableContainer";
 import LogoutButton from "@/components/LogoutButton";
+import { ProgressSound } from "@/components/Progress";
+import SoundControl from "@/components/SoundControl";
 import SpaceDropDown from "@/components/SpaceDropDown";
 import { Progress } from "@/components/ui/progress";
 import WidgetDropDown from "@/components/WidgetDropDown";
@@ -15,26 +18,23 @@ export default async function page() {
   if (!session?.user) return redirect("/login");
 
   return (
-    <div className="flex h-screen w-full flex-col bg-[url('/nature1.jpg')] bg-cover bg-center p-8 text-white">
-      <p className="text-xl text-white/80">
+    <div className="flex h-screen w-full flex-col overflow-hidden bg-[url('/nature1.jpg')] bg-cover bg-center p-8 text-white">
+      <Background />
+
+      <p className="relative text-xl text-white/80">
         {session?.user?.name?.split(" ")[0].toUpperCase() ?? "Guest"}&apos;S
         ROOM
       </p>
-      <div className="mb-4 flex items-center">
+      <div className="relative mb-4 flex items-center">
         <SpaceDropDown />
         <WidgetDropDown />
 
         <LogoutButton />
       </div>
       <DraggableContainer />
-      {/*  */}
-      {/*  */}
-      {/* Remplate your code */}
-      <div className="mx-auto flex h-16 items-center justify-center gap-10 rounded-full bg-slate-500/60 px-12">
-        <div className="flex items-center gap-3">
-          <IoVolumeHighOutline size={30} className="cursor-pointer" />
-          <Progress value={66} className="w-64 first:bg-red-600" />
-        </div>
+
+      <div className="relative mx-auto flex h-16 items-center justify-center gap-10 rounded-full bg-slate-500/60 px-12">
+        <SoundControl />
         <span className="h-10 w-[1px] bg-white"></span>
         <div className="flex items-center gap-5">
           <IoSettingsOutline size={26} className="cursor-pointer" />

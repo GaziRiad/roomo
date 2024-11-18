@@ -1,16 +1,19 @@
+"use client";
+
 import { useEffect, useRef } from "react";
+import { useAudio } from "../store";
 
-interface BackgroundProps {
-  isMute: boolean;
-  volume: number;
-}
-
-export default function Background({ isMute, volume }: BackgroundProps) {
+export default function Background() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const { isMute, volume } = useAudio();
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.volume = isMute ? 0 : volume / 100; // Set volume (0 to 1)
+      videoRef.current.muted = isMute;
+      if (!isMute) {
+        videoRef.current.volume = volume / 100;
+      }
+      console.log("Updated video settings: mute =", isMute, "volume =", volume);
     }
   }, [isMute, volume]);
 
@@ -19,8 +22,7 @@ export default function Background({ isMute, volume }: BackgroundProps) {
       ref={videoRef}
       autoPlay
       loop
-      muted={isMute}
-      className="absolute top-0 left-0 h-full w-full object-cover"
+      className="absolute left-0 top-0 h-full w-full object-cover"
     >
       <source src="/background.mp4" type="video/mp4" />
       Your browser does not support the video tag.
