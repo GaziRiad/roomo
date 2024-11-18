@@ -69,3 +69,6 @@
     @apply bg-background text-foreground;
   }
 }
+.cut-corner {
+  background: linear-gradient(45deg, transparent 10px, #dddddd00 0);
+}

@@ -130,7 +130,7 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
       aria-label="Draggable Timer"
     >
       <div
-        className={`flex items-center justify-between border-b-2 border-b-gray-400 px-2 pb-5 ${
+        className={`flex h-12 items-center justify-between border-b-2 border-b-gray-400 px-2 ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
         data-draggable
@@ -138,7 +138,7 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
         <h2 className="text-xl">Timer</h2>
         <span
           onClick={() => timer.hideTimer()}
-          className="h-full cursor-pointer"
+          className="flex h-full cursor-pointer items-center"
         >
           <IoRemove size={32} />
         </span>
@@ -220,7 +220,7 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
       </ul>
 
       {showSettings && (
-        <div>
+        <div className="border-t-2 border-solid border-gray-200 pt-2">
           <ul className="flex cursor-default justify-between gap-2 px-2 pb-2">
             <li>
               <Label htmlFor="pomodoro" className="cursor-pointer pb-2 text-sm">
