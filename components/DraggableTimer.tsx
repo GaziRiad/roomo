@@ -4,6 +4,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { useTimer } from "@/store";
 import { Card } from "@/components/ui/card";
 import { IoRefreshCircle, IoRemove } from "react-icons/io5";
+import { Settings } from "lucide-react";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 interface DraggableTimerProps {
   containerRef: React.RefObject<HTMLDivElement>;
@@ -17,15 +21,23 @@ const formatTime = (time: number) => {
     .padStart(2, "0")}`;
 };
 
+const formatInput = (value: number) => value.toString().padStart(2, "0");
+
 export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
   const timer = useTimer();
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [time, setTime] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
+  const [checked, setChecked] = useState(0);
+  const [pomodoro, setPomodoro] = useState(25);
+  const [shortBreak, setShortBreak] = useState(5);
+  const [longBreak, setLongBreak] = useState(10);
+  const [isModified, setIsModified] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const timerRef = useRef<HTMLDivElement>(null);
 
-  // timer countDown
+  // Timer countdown
   useEffect(() => {
     if (!isRunning) return;
 
@@ -42,10 +54,10 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
     return () => clearInterval(interval);
   }, [isRunning]);
 
+  // Dragging logic
   const handleMouseDown = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
 
-    // Only allow dragging if the clicked element is within the draggable header
     if (!target.closest("[data-draggable]")) return;
 
     setIsDragging(true);
@@ -80,12 +92,31 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
     document.addEventListener("mouseup", handleMouseUp);
   };
 
+  const handleInputChange = (
+    value: string,
+    setter: React.Dispatch<React.SetStateAction<number>>,
+  ) => {
+    const num = parseInt(value, 10);
+    if (num >= 0 || value === "") {
+      setter(num || 0);
+      setIsModified(true);
+    }
+  };
+
+  const saveSettings = () => {
+    setIsModified(false);
+    if (checked === 0) setTime(pomodoro * 60);
+    if (checked === 1) setTime(shortBreak * 60);
+    if (checked === 2) setTime(longBreak * 60);
+    setShowSettings(false);
+  };
+
   if (!timer) return null;
 
   return (
     <Card
       ref={timerRef}
-      className={`absolute flex h-44 w-80 select-none flex-col justify-between border-none bg-slate-950/95 p-2 text-center text-white ${
+      className={`absolute flex min-h-48 w-96 select-none flex-col justify-between gap-1 border-none bg-slate-950/95 p-2 text-center font-Oswald text-white ${
         isDragging ? "opacity-75" : ""
       }`}
       style={{
@@ -97,7 +128,7 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
       aria-label="Draggable Timer"
     >
       <div
-        className={`flex items-center justify-between border-b-2 border-b-gray-400 px-2 pb-2 ${
+        className={`flex items-center justify-between border-b-2 border-b-gray-400 px-2 pb-4 ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
         data-draggable
@@ -111,32 +142,40 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
         </span>
       </div>
 
-      <div className="flex cursor-default items-center justify-between gap-4 p-4">
-        <h3 className="flex-1 text-start text-xl font-bold">
+      <div className="flex cursor-default items-center justify-between gap-2 p-4">
+        <h3 className="w-24 text-start text-4xl font-bold">
           {formatTime(time)}
         </h3>
         <button
-          className="border-1 w-24 flex-1 rounded-md border-gray-700 bg-slate-50 p-2 font-bold text-black"
+          className="border-1 w-24 rounded-md border-gray-700 bg-slate-50 p-2 font-bold text-black"
           onClick={() => setIsRunning(!isRunning)}
         >
           {isRunning ? "Pause" : "Start"}
         </button>
         <span
-          onClick={() => setTime(20 * 60)}
-          className="flex flex-1 cursor-pointer justify-center"
+          onClick={() => {
+            if (checked === 0) setTime(pomodoro * 60);
+            if (checked === 1) setTime(shortBreak * 60);
+            if (checked === 2) setTime(longBreak * 60);
+            setIsRunning(!isRunning);
+          }}
+          className="flex cursor-pointer justify-center"
           title="Refresh"
         >
           <IoRefreshCircle size={40} />
         </span>
       </div>
 
-      <ul className="flex cursor-default justify-between px-2 pb-2">
+      <ul className="flex cursor-default justify-between px-2 pb-4">
         <li>
           <p
-            className="cursor-pointer hover:opacity-80"
+            className={`cursor-pointer pb-1 hover:opacity-80 ${
+              checked === 0 && "border-b-2 border-gray-300"
+            }`}
             onClick={() => {
-              setTime(25 * 60);
+              setTime(pomodoro * 60);
               setIsRunning(false);
+              setChecked(0);
             }}
           >
             Pomodoro
@@ -144,10 +183,13 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
         </li>
         <li>
           <p
-            className="cursor-pointer hover:opacity-80"
+            className={`cursor-pointer pb-1 hover:opacity-80 ${
+              checked === 1 && "border-b-2 border-gray-300"
+            }`}
             onClick={() => {
-              setTime(5 * 60);
+              setTime(shortBreak * 60);
               setIsRunning(false);
+              setChecked(1);
             }}
           >
             Short break
@@ -155,16 +197,82 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
         </li>
         <li>
           <p
-            className="cursor-pointer hover:opacity-80"
+            className={`cursor-pointer pb-1 hover:opacity-80 ${
+              checked === 2 && "border-b-2 border-gray-300"
+            }`}
             onClick={() => {
-              setTime(10 * 60);
+              setTime(longBreak * 60);
               setIsRunning(false);
+              setChecked(2);
             }}
           >
             Long break
           </p>
         </li>
+        <li>
+          <Settings
+            className="cursor-pointer pb-1 hover:opacity-80"
+            onClick={() => setShowSettings(!showSettings)}
+          />
+        </li>
       </ul>
+
+      {showSettings && (
+        <div>
+          <ul className="flex cursor-default justify-between gap-2 px-2 pb-2">
+            <li>
+              <Label htmlFor="pomodoro" className="cursor-pointer pb-2 text-sm">
+                Pomodoro
+              </Label>
+              <Input
+                id="pomodoro"
+                type="text"
+                inputMode="numeric"
+                className="appearance-none bg-white text-black"
+                value={formatInput(pomodoro)}
+                onChange={(e) => handleInputChange(e.target.value, setPomodoro)}
+              />
+            </li>
+            <li>
+              <Label htmlFor="short" className="cursor-pointer pb-2 text-sm">
+                Short break
+              </Label>
+              <Input
+                id="short"
+                type="text"
+                inputMode="numeric"
+                className="appearance-none bg-white text-black"
+                value={formatInput(shortBreak)}
+                onChange={(e) =>
+                  handleInputChange(e.target.value, setShortBreak)
+                }
+              />
+            </li>
+            <li>
+              <Label htmlFor="long" className="cursor-pointer pb-2 text-sm">
+                Long break
+              </Label>
+              <Input
+                id="long"
+                type="text"
+                inputMode="numeric"
+                className="appearance-none bg-white text-black"
+                value={formatInput(longBreak)}
+                onChange={(e) =>
+                  handleInputChange(e.target.value, setLongBreak)
+                }
+              />
+            </li>
+          </ul>
+          {isModified && (
+            <div className="px-2">
+              <Button onClick={saveSettings} className="w-full bg-blue-500">
+                Save
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
     </Card>
   );
 }
