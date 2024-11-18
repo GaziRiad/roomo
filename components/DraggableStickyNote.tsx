@@ -63,16 +63,6 @@ export default function DraggableStickyNote({
     document.addEventListener("mouseup", handleMouseUp);
   };
 
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLTextAreaElement>,
-    setIsEditing: React.Dispatch<React.SetStateAction<boolean>>,
-  ) => {
-    if (e.key === "Enter") {
-      e.preventDefault(); // Prevent new lines
-      setIsEditing(false);
-    }
-  };
-
   return (
     <Card
       ref={NoteRef}

@@ -5,6 +5,8 @@ import { Card } from "@/components/ui/card";
 import { IoRemove } from "react-icons/io5";
 import { CheckCircle, CircleIcon, CircleX } from "lucide-react";
 import { useTodoList } from "@/store";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 interface DraggableTodoListProps {
   containerRef: React.RefObject<HTMLDivElement>;
@@ -20,7 +22,7 @@ export default function DraggableTodoList({
   containerRef,
 }: DraggableTodoListProps) {
   const todoList = useTodoList();
-  const [position, setPosition] = useState({ x: 680, y: 120 });
+  const [position, setPosition] = useState({ x: 0, y: 190 });
   const [isDragging, setIsDragging] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [taskText, setTaskText] = useState("");
@@ -84,6 +86,13 @@ export default function DraggableTodoList({
     );
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleAddTask();
+    }
+  };
+
   return (
     <Card
       ref={todoRef}
@@ -114,19 +123,20 @@ export default function DraggableTodoList({
       </div>
 
       <div className="flex items-center gap-2 px-2 py-2">
-        <input
+        <Input
           type="text"
           value={taskText}
           onChange={(e) => setTaskText(e.target.value)}
           placeholder="Add a task..."
-          className="flex-1 rounded-md border-none px-2 py-1 text-black outline-none"
+          className="h-8 flex-1 rounded-md border-none px-2 text-black outline-none"
+          onKeyDown={(e) => handleKeyDown(e)}
         />
-        <button
+        <Button
           onClick={handleAddTask}
-          className="rounded-md bg-blue-500 px-4 py-1 text-white hover:bg-blue-600"
+          className="h-8 rounded-md bg-blue-500 px-4 py-1 text-white hover:bg-blue-600"
         >
           Add
-        </button>
+        </Button>
       </div>
 
       <ul className="min-h-40 px-2 py-1">

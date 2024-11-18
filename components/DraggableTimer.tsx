@@ -223,27 +223,33 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
         <div className="border-t-2 border-solid border-gray-200 pt-2">
           <ul className="flex cursor-default justify-between gap-2 px-2 pb-2">
             <li>
-              <Label htmlFor="pomodoro" className="cursor-pointer pb-2 text-sm">
+              <Label
+                htmlFor="pomodoro"
+                className="cursor-pointer text-sm text-gray-200"
+              >
                 Pomodoro
               </Label>
               <Input
                 id="pomodoro"
                 type="text"
                 inputMode="numeric"
-                className="appearance-none bg-white text-black"
+                className="mt-2 appearance-none bg-white text-black"
                 value={formatInput(pomodoro)}
                 onChange={(e) => handleInputChange(e.target.value, setPomodoro)}
               />
             </li>
             <li>
-              <Label htmlFor="short" className="cursor-pointer pb-2 text-sm">
+              <Label
+                htmlFor="short"
+                className="cursor-pointer text-sm text-gray-200"
+              >
                 Short break
               </Label>
               <Input
                 id="short"
                 type="text"
                 inputMode="numeric"
-                className="appearance-none bg-white text-black"
+                className="mt-2 appearance-none bg-white text-black"
                 value={formatInput(shortBreak)}
                 onChange={(e) =>
                   handleInputChange(e.target.value, setShortBreak)
@@ -251,14 +257,17 @@ export default function DraggableTimer({ containerRef }: DraggableTimerProps) {
               />
             </li>
             <li>
-              <Label htmlFor="long" className="cursor-pointer pb-2 text-sm">
+              <Label
+                htmlFor="long"
+                className="cursor-pointer text-sm text-gray-200"
+              >
                 Long break
               </Label>
               <Input
                 id="long"
                 type="text"
                 inputMode="numeric"
-                className="appearance-none bg-white text-black"
+                className="mt-2 appearance-none bg-white text-black"
                 value={formatInput(longBreak)}
                 onChange={(e) =>
                   handleInputChange(e.target.value, setLongBreak)
