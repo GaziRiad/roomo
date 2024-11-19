@@ -1,15 +1,13 @@
 import Background from "@/components/Background";
 import DraggableContainer from "@/components/DraggableContainer";
 import LogoutButton from "@/components/LogoutButton";
-import { ProgressSound } from "@/components/Progress";
 import SoundControl from "@/components/SoundControl";
 import SpaceDropDown from "@/components/SpaceDropDown";
-import { Progress } from "@/components/ui/progress";
 import WidgetDropDown from "@/components/WidgetDropDown";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { FaUserAlt } from "react-icons/fa";
-import { IoSettingsOutline, IoVolumeHighOutline } from "react-icons/io5";
+import { IoSettingsOutline } from "react-icons/io5";
 
 export default async function page() {
   const session = await auth();

@@ -6,7 +6,7 @@ import { useAudio } from "../store";
 
 export function ProgressSound({ className }: { className: string }) {
   const progressRef = useRef<HTMLDivElement | null>(null);
-  const { isMute, volume, setVolume } = useAudio();
+  const { isMute, toggleMute, volume, setVolume } = useAudio();
 
   const handleMouseMove = (event: MouseEvent | TouchEvent) => {
     if (!progressRef.current) return;
@@ -21,6 +21,7 @@ export function ProgressSound({ className }: { className: string }) {
     percentage = Math.max(0, Math.min(100, percentage));
 
     setVolume(isMute ? 0 : percentage);
+    if (percentage <= 0) toggleMute();
   };
 
   const handleMouseDown = (event: React.MouseEvent | React.TouchEvent) => {
