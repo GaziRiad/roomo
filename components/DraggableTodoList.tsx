@@ -96,7 +96,7 @@ export default function DraggableTodoList({
   return (
     <Card
       ref={todoRef}
-      className={`w-100 absolute flex min-h-44 select-none flex-col justify-between border-none bg-slate-950/95 p-2 text-center text-white ${
+      className={`w-100 absolute flex max-h-full min-h-44 select-none flex-col justify-between border-none bg-slate-950/95 p-2 text-center text-white ${
         isDragging ? "opacity-75" : ""
       }`}
       style={{
@@ -139,7 +139,7 @@ export default function DraggableTodoList({
         </Button>
       </div>
 
-      <ul className="min-h-40 px-2 py-1">
+      <ul className="max-h-[80%] min-h-40 overflow-y-auto px-2 py-1">
         {tasks.map((task) => (
           <li
             key={task.id}
