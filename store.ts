@@ -30,6 +30,7 @@ interface AudioState {
   volume: number;
   toggleMute: () => void;
   setVolume: (volume: number) => void;
+  setMuteValue: (val: boolean) => void;
 }
 
 export const useAudio = create<AudioState>((set) => ({
@@ -38,6 +39,10 @@ export const useAudio = create<AudioState>((set) => ({
   toggleMute: () =>
     set((state) => ({
       isMute: !state.isMute,
+    })),
+  setMuteValue: (val) =>
+    set(() => ({
+      isMute: val,
     })),
   setVolume: (volume) =>
     set(() => ({

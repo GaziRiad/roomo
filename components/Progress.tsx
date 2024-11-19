@@ -6,7 +6,7 @@ import { useAudio } from "../store";
 
 export function ProgressSound({ className }: { className: string }) {
   const progressRef = useRef<HTMLDivElement | null>(null);
-  const { isMute, toggleMute, volume, setVolume } = useAudio();
+  const { isMute, setMuteValue, toggleMute, volume, setVolume } = useAudio();
 
   const handleMouseMove = (event: MouseEvent | TouchEvent) => {
     if (!progressRef.current) return;
@@ -20,13 +20,15 @@ export function ProgressSound({ className }: { className: string }) {
 
     percentage = Math.max(0, Math.min(100, percentage));
 
-    setVolume(isMute ? 0 : percentage);
-    if (percentage <= 0) toggleMute();
+    setVolume(percentage);
+    if (percentage <= 0) {
+      setMuteValue(true);
+    } else {
+      setMuteValue(false);
+    }
   };
 
   const handleMouseDown = (event: React.MouseEvent | React.TouchEvent) => {
-    if (isMute) return;
-
     handleMouseMove(event.nativeEvent);
 
     const moveEvent =
