@@ -73,41 +73,84 @@
   background: linear-gradient(45deg, transparent 10px, #dddddd00 0);
 }
 
+/* Style the todo scrollbar */
+
 /* General Scrollbar Styling */
-::-webkit-scrollbar {
+.todo::-webkit-scrollbar {
   width: 8px;
 }
 
 /* WebKit-based Browsers (Chrome, Safari) */
-::-webkit-scrollbar-track {
+.todo::-webkit-scrollbar-track {
   background: #f1f1f126;
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb {
+.todo::-webkit-scrollbar-thumb {
   background: #3b82f6;
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.todo::-webkit-scrollbar-thumb:hover {
   background: #2373f5;
 }
 
 /* Internet Explorer and Edge */
-::-ms-scrollbar {
+.todo::-ms-scrollbar {
   width: 8px;
 }
 
-::-ms-scrollbar-track {
+.todo::-ms-scrollbar-track {
   background: #f1f1f126;
   border-radius: 5px;
 }
 
-::-ms-scrollbar-thumb {
+.todo::-ms-scrollbar-thumb {
   background: #3b82f6;
   border-radius: 5px;
 }
 
-::-ms-scrollbar-thumb:hover {
+.todo::-ms-scrollbar-thumb:hover {
   background: #2373f5;
+}
+
+/* style the sticky note scroll bar */
+
+/* General Scrollbar Styling */
+.note::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* WebKit-based Browsers (Chrome, Safari) */
+.note::-webkit-scrollbar-track {
+  background: rgba(159, 130, 14, 0.95);
+  border-radius: 5px;
+}
+
+.note::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 5px;
+}
+
+.note::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+/* Internet Explorer and Edge */
+.note::-ms-scrollbar {
+  width: 8px;
+}
+
+.note::-ms-scrollbar-track {
+  background: rgba(159, 130, 14, 0.95);
+  border-radius: 5px;
+}
+
+.note::-ms-scrollbar-thumb {
+  background: white;
+  border-radius: 5px;
+}
+
+.note::-ms-scrollbar-thumb:hover {
+  background: white;
 }

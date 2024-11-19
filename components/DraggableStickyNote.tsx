@@ -103,11 +103,11 @@ export default function DraggableStickyNote({
             onChange={(e) => setNoteContent(e.target.value)}
             onBlur={() => setIsEditingContent(false)}
             autoFocus
-            className="h-full min-h-[100px] flex-1 resize-none bg-transparent font-semibold text-white outline-none"
+            className="note h-full min-h-[105px] w-full flex-1 resize-none bg-transparent font-semibold text-white outline-none"
           />
         ) : (
           <p
-            className="h-full min-h-28 w-full flex-1 whitespace-pre-wrap break-words font-semibold"
+            className="note h-[105px] w-full flex-1 overflow-y-auto whitespace-pre-wrap break-words font-semibold"
             onClick={() => setIsEditingContent(true)}
           >
             {noteContent || "Add your note ..."}

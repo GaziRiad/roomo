@@ -146,7 +146,7 @@ export default function DraggableTodoList({
         </Button>
       </div>
 
-      <ul className="max-h-[80%] min-h-[150px] overflow-y-auto px-2 py-1">
+      <ul className="todo max-h-[80%] min-h-[150px] overflow-y-auto px-2 py-1">
         {tasks.map((task) => (
           <li
             key={task.id}
