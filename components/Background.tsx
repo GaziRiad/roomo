@@ -29,16 +29,18 @@ export default function Background({
     }
   };
 
-  // Handle mute/volume changes
   useEffect(() => {
+    // Ensure the internal player is available before interacting with it
     const player = playerRef.current?.getInternalPlayer();
+
     if (player) {
       if (isMute) {
         player.mute();
       } else {
         player.unMute();
-        player.setVolume(volume * 100);
+        player.setVolume(volume);
       }
+      console.log("Updated video settings: mute =", isMute, "volume =", volume);
     }
   }, [isMute, volume]);
 
