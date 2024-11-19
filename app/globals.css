@@ -72,3 +72,42 @@
 .cut-corner {
   background: linear-gradient(45deg, transparent 10px, #dddddd00 0);
 }
+
+/* General Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* WebKit-based Browsers (Chrome, Safari) */
+::-webkit-scrollbar-track {
+  background: #f1f1f126;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2373f5;
+}
+
+/* Internet Explorer and Edge */
+::-ms-scrollbar {
+  width: 8px;
+}
+
+::-ms-scrollbar-track {
+  background: #f1f1f126;
+  border-radius: 5px;
+}
+
+::-ms-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 5px;
+}
+
+::-ms-scrollbar-thumb:hover {
+  background: #2373f5;
+}
