@@ -137,6 +137,13 @@ export default function DraggableTodoList({
         >
           Add
         </Button>
+        <Button
+          disabled={tasks.length === 0}
+          onClick={() => setTasks([])}
+          className="h-8 rounded-md bg-red-500 px-4 py-1 text-white hover:bg-red-600"
+        >
+          Clear All
+        </Button>
       </div>
 
       <ul className="max-h-[80%] min-h-40 overflow-y-auto px-2 py-1">
