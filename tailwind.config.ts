@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        Raleway: ["Raleway Dots", "sans-serif"],
+        Oswald: ["Oswald", "sans-serif"],
+      },
       backgroundImage: {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",

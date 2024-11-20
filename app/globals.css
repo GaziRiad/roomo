@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway+Dots&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -65,4 +68,89 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+.cut-corner {
+  background: linear-gradient(45deg, transparent 10px, #dddddd00 0);
+}
+
+/* Style the todo scrollbar */
+
+/* General Scrollbar Styling */
+.todo::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* WebKit-based Browsers (Chrome, Safari) */
+.todo::-webkit-scrollbar-track {
+  background: #f1f1f126;
+  border-radius: 5px;
+}
+
+.todo::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 5px;
+}
+
+.todo::-webkit-scrollbar-thumb:hover {
+  background: #2373f5;
+}
+
+/* Internet Explorer and Edge */
+.todo::-ms-scrollbar {
+  width: 8px;
+}
+
+.todo::-ms-scrollbar-track {
+  background: #f1f1f126;
+  border-radius: 5px;
+}
+
+.todo::-ms-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 5px;
+}
+
+.todo::-ms-scrollbar-thumb:hover {
+  background: #2373f5;
+}
+
+/* style the sticky note scroll bar */
+
+/* General Scrollbar Styling */
+.note::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* WebKit-based Browsers (Chrome, Safari) */
+.note::-webkit-scrollbar-track {
+  background: rgba(159, 130, 14, 0.95);
+  border-radius: 5px;
+}
+
+.note::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 5px;
+}
+
+.note::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+/* Internet Explorer and Edge */
+.note::-ms-scrollbar {
+  width: 8px;
+}
+
+.note::-ms-scrollbar-track {
+  background: rgba(159, 130, 14, 0.95);
+  border-radius: 5px;
+}
+
+.note::-ms-scrollbar-thumb {
+  background: white;
+  border-radius: 5px;
+}
+
+.note::-ms-scrollbar-thumb:hover {
+  background: white;
 }
